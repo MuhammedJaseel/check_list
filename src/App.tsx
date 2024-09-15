@@ -1,29 +1,64 @@
-import React, { useEffect, useState } from "react";
+import {
+  createContext,
+  StrictMode,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import "./App.css";
 import { list, list1 } from "./data";
 import TaskList from "./Components/List";
-import axios from "axios";
+import { ListServices } from "./Services/list";
 
-function App() {
-  const [list, setList]: any = useState([]);
-  const [showList, setShowList] = useState(false);
+export const UserContext: any = createContext(null);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://66e59ca45cc7f9b6273ddad8.mockapi.io/list/all")
-  //     .then((res) => setList(res.data.reverse()))
-  //     .catch((e) => {});
-  // }, []);
+const initialState: any = { checkList: [], showList: false };
+
+const userReducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "ALL_LIST":
+      return { ...state, checkList: action.data };
+    case "SHOW_LIST":
+      return { ...state, showList: action.data };
+    default:
+      return [];
+  }
+};
+
+export const UserProvider = ({ children }: any) => {
+  const [state, dispatch] = useReducer(userReducer, initialState);
 
   return (
-    <React.StrictMode>
+    <UserContext.Provider value={{ state, dispatch }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export default function App() {
+  const { state, dispatch }: any = useContext(UserContext);
+  const listServices = new ListServices();
+
+  useEffect(() => loadAll(), []);
+
+  const loadAll = () => {
+    listServices
+      .getAll()
+      .then((res) => dispatch({ type: "ALL_LIST", data: res.data.reverse() }))
+      .catch((e) => {});
+  };
+
+  return (
+    <StrictMode>
       {/* --START-- Header */}
       <div className="appHeader">
         <div className="title">Task list</div>
-        <button onClick={() => setShowList(true)}>Tasklist pop Up</button>
+        <button onClick={() => dispatch({ type: "SHOW_LIST", data: true })}>
+          Tasklist pop Up
+        </button>
       </div>
       {/* --START-- Landing */}
-      <div className="addLanding">
+      <div className="appLanding">
         <div className="landingBody">
           <div className="text1">
             Lorem ipsum dolor sit amet consectetur. Eros libero.
@@ -31,15 +66,19 @@ function App() {
           <div className="subTitle">
             Lorem ipsum dolor sit amet consectetur. Odio.
           </div>
-          {list.slice(0, 10).map((it: any, k: number) => (
+          {state?.checkList?.slice(0, 8).map((it: any, k: number) => (
             <div className="row" key={k}>
-              <div className="checkIc" />
-              {it.content}
+              <div className={it.done ? "checkIcDone" : "checkIc"} />
+              {it.title}
             </div>
           ))}
           <br />
           <br />
-          <button onClick={() => setShowList(true)}>Check Tasklist</button>
+          <button onClick={() => dispatch({ type: "SHOW_LIST", data: true })}>
+            Check Tasklist
+          </button>
+          <br />
+          <br />
         </div>
         <div className="servicePic" />
       </div>
@@ -60,7 +99,7 @@ function App() {
             <div className="items">
               {list.map((it: any, k: number) => (
                 <div className="item" key={k}>
-                  <div className="checkIc" />
+                  <div className="checkIcDone" />
                   {it}
                 </div>
               ))}
@@ -99,9 +138,7 @@ function App() {
           amet et aenean. Consectetur.
         </div>
       </div>
-      {showList && <TaskList close={() => setShowList(false)} />}
-    </React.StrictMode>
+      {state.showList && <TaskList />}
+    </StrictMode>
   );
 }
-
-export default App;

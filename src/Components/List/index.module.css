@@ -19,15 +19,28 @@
 }
 
 .input {
-  width: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 18px;
+  border: 1.5px solid #0000001f;
+  border-radius: 18px;
+  margin-bottom: 16px;
+}
+.input:focus {
+  outline-color: #dd3333;
+}
+
+.select {
+  width: 120px;
   padding: 5px 14px;
   margin-right: 12px;
   border: 1.5px solid #0000001f;
   border-radius: 18px;
 }
-.input:focus {
+.select:focus {
   outline-color: #dd3333;
 }
+
 .header {
   display: flex;
   align-items: center;
@@ -53,6 +66,7 @@
 .addItems {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 .addItems .addIc {
   width: 25px;
@@ -66,10 +80,10 @@
   padding: 0px;
 }
 
-.addItems button {
+/* .addItems button {
   padding: 6px 18px;
   font-size: 14px;
-}
+} */
 
 .body {
   max-height: 500px;
@@ -78,7 +92,6 @@
 }
 .row {
   display: flex;
-  align-items: center;
   margin-top: 16px;
 }
 
@@ -106,8 +119,37 @@
   cursor: pointer;
 }
 
+.desc {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #7b7b7b;
+}
+
 .footer {
   margin-top: 32px;
   display: flex;
   justify-content: flex-end;
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////// */
+.formPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0000001f;
+}
+
+.formPopupBody {
+  width: 300px;
+  border-radius: 15px;
+  box-shadow: 0 0 7px #f2c6c6;
+  padding: 24px 32px;
+  background-color: white;
 }
