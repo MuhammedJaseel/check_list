@@ -1,0 +1,113 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0000001f;
+}
+
+.popupBody {
+  width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 0 7px #f2c6c6;
+  padding: 24px 32px;
+  background-color: white;
+}
+
+.input {
+  width: 200px;
+  padding: 5px 14px;
+  margin-right: 12px;
+  border: 1.5px solid #0000001f;
+  border-radius: 18px;
+}
+.input:focus {
+  outline-color: #dd3333;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.close {
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  background-image: url(../../Assets/close.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 3px;
+}
+.close:hover {
+  background-color: rgb(218, 198, 198);
+}
+
+.addItems {
+  display: flex;
+  align-items: center;
+}
+.addItems .addIc {
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+  background-image: url(../../Assets/addIc.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 12px;
+  padding: 0px;
+}
+
+.addItems button {
+  padding: 6px 18px;
+  font-size: 14px;
+}
+
+.body {
+  max-height: 500px;
+  overflow: auto;
+  transition: 0.1s;
+}
+.row {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.editIc {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  background-image: url(../../Assets/edit.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.removeIc {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  background-image: url(../../Assets/remove.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+}
